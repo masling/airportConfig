@@ -1,0 +1,20 @@
+# Minimal Clash/Mihomo base for generating `/etc/openclash/proxy_provider/airport.yaml`.
+#
+# This file is intentionally small. The generated provider only needs a
+# `proxies:` list; OpenClash routing, DNS, TUN, and proxy-groups live in
+# `config/openclash-custom.yaml`.
+#
+# If your Subconverter build strips unsupported node types, do not use it for
+# AnyTLS. Download the airport's native Mihomo/Clash.Meta YAML directly with
+# `scripts/update_airport.sh` instead.
+
+mixed-port: 7890
+allow-lan: true
+mode: rule
+log-level: info
+ipv6: false
+
+proxies: []
+proxy-groups: []
+rules: []
+
