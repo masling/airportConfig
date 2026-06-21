@@ -1,0 +1,247 @@
+# OpenClash / Mihomo base used by Subconverter.
+#
+# Subconverter should inject concrete converted nodes into `proxies:` and
+# generate strategy groups from `pref-openclash-custom.ini`. This base carries
+# the same DNS, TUN, and routing rules as `config/openclash-custom.yaml`.
+
+mixed-port: 7890
+redir-port: 7892
+tproxy-port: 7893
+allow-lan: true
+bind-address: "*"
+mode: rule
+log-level: info
+ipv6: false
+external-controller: 0.0.0.0:9090
+secret: ""
+unified-delay: true
+tcp-concurrent: true
+find-process-mode: strict
+global-client-fingerprint: chrome
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain:
+    - Mijia Cloud
+    - dlg.io.mi.com
+
+dns:
+  enable: true
+  listen: 0.0.0.0:7874
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*.lan"
+    - "*.local"
+    - localhost.ptlogin2.qq.com
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    - "time.*.com"
+    - "time.*.gov"
+    - pool.ntp.org
+    - "+.market.xiaomi.com"
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  proxy-server-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  direct-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  fallback:
+    - "https://1.1.1.1/dns-query#🚀 节点选择"
+    - "https://8.8.8.8/dns-query#🚀 节点选择"
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+
+tun:
+  enable: true
+  stack: mixed
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+  dns-hijack:
+    - any:53
+    - tcp://any:53
+  strict-route: true
+  mtu: 9000
+  gso: true
+  gso-max-size: 65536
+
+proxies: []
+
+rules:
+  # 1. LAN and private networks direct
+  - DOMAIN,localhost,DIRECT
+  - DOMAIN-SUFFIX,local,DIRECT
+  - DOMAIN-SUFFIX,lan,DIRECT
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,10.0.0.0/8,DIRECT,no-resolve
+  - IP-CIDR,172.16.0.0/12,DIRECT,no-resolve
+  - IP-CIDR,192.168.0.0/16,DIRECT,no-resolve
+  - IP-CIDR,169.254.0.0/16,DIRECT,no-resolve
+  - IP-CIDR,224.0.0.0/4,DIRECT,no-resolve
+
+  # 2. Ads
+  - DOMAIN-SUFFIX,adservice.google.com,🛑 广告拦截
+  - DOMAIN-SUFFIX,ads.google.com,🛑 广告拦截
+  - DOMAIN-SUFFIX,doubleclick.net,🛑 广告拦截
+  - DOMAIN-SUFFIX,googlesyndication.com,🛑 广告拦截
+  - DOMAIN-SUFFIX,googleadservices.com,🛑 广告拦截
+  - DOMAIN-SUFFIX,google-analytics.com,🛑 广告拦截
+  - DOMAIN-SUFFIX,adnxs.com,🛑 广告拦截
+  - DOMAIN-SUFFIX,adsrvr.org,🛑 广告拦截
+
+  # 3. ChatGPT / OpenAI
+  - DOMAIN-SUFFIX,chatgpt.com,💬 ChatGPT
+  - DOMAIN-SUFFIX,openai.com,💬 ChatGPT
+  - DOMAIN-SUFFIX,oaistatic.com,💬 ChatGPT
+  - DOMAIN-SUFFIX,oaiusercontent.com,💬 ChatGPT
+  - DOMAIN-SUFFIX,auth0.com,💬 ChatGPT
+
+  # 4. Claude
+  - DOMAIN-SUFFIX,claude.ai,🧠 Claude
+  - DOMAIN-SUFFIX,anthropic.com,🧠 Claude
+  - DOMAIN-SUFFIX,claudeusercontent.com,🧠 Claude
+
+  # 5. Gemini
+  - DOMAIN,gemini.google.com,✨ Gemini
+  - DOMAIN,aistudio.google.com,✨ Gemini
+  - DOMAIN,ai.google.dev,✨ Gemini
+  - DOMAIN,generativelanguage.googleapis.com,✨ Gemini
+
+  # 6. Perplexity / other AI
+  - DOMAIN-SUFFIX,perplexity.ai,🔎 Perplexity
+  - DOMAIN-SUFFIX,poe.com,🤖 AI
+  - DOMAIN-SUFFIX,x.ai,🤖 AI
+  - DOMAIN-SUFFIX,grok.com,🤖 AI
+  - DOMAIN-SUFFIX,openrouter.ai,🤖 AI
+  - DOMAIN-SUFFIX,huggingface.co,🤖 AI
+  - DOMAIN-SUFFIX,replicate.com,🤖 AI
+  - DOMAIN-SUFFIX,midjourney.com,🤖 AI
+  - DOMAIN-SUFFIX,runwayml.com,🤖 AI
+  - DOMAIN-SUFFIX,ideogram.ai,🤖 AI
+  - DOMAIN-SUFFIX,leonardo.ai,🤖 AI
+
+  # 7. AI coding tools
+  - DOMAIN-SUFFIX,copilot.microsoft.com,🧑‍💻 Copilot
+  - DOMAIN-SUFFIX,githubcopilot.com,🧑‍💻 Copilot
+  - DOMAIN-SUFFIX,copilot-proxy.githubusercontent.com,🧑‍💻 Copilot
+  - DOMAIN-SUFFIX,cursor.com,🧑‍💻 Copilot
+  - DOMAIN-SUFFIX,cursor.sh,🧑‍💻 Copilot
+  - DOMAIN-SUFFIX,windsurf.com,🧑‍💻 Copilot
+  - DOMAIN-SUFFIX,codeium.com,🧑‍💻 Copilot
+
+  # 8. YouTube
+  - DOMAIN-SUFFIX,youtube.com,📺 YouTube
+  - DOMAIN-SUFFIX,youtu.be,📺 YouTube
+  - DOMAIN-SUFFIX,ytimg.com,📺 YouTube
+  - DOMAIN-SUFFIX,googlevideo.com,📺 YouTube
+  - DOMAIN-SUFFIX,youtubei.googleapis.com,📺 YouTube
+  - DOMAIN-SUFFIX,yt3.ggpht.com,📺 YouTube
+
+  # 9. Google non-AI
+  - DOMAIN-SUFFIX,google.com,🔍 Google
+  - DOMAIN-SUFFIX,gstatic.com,🔍 Google
+  - DOMAIN-SUFFIX,googleapis.com,🔍 Google
+  - DOMAIN-SUFFIX,googleusercontent.com,🔍 Google
+  - DOMAIN-SUFFIX,gmail.com,🔍 Google
+  - DOMAIN-SUFFIX,googlemail.com,🔍 Google
+  - DOMAIN-SUFFIX,googledrive.com,🔍 Google
+  - DOMAIN,docs.google.com,🔍 Google
+  - DOMAIN,drive.google.com,🔍 Google
+
+  # 10. GitHub / development tools
+  - DOMAIN-SUFFIX,github.com,💻 GitHub
+  - DOMAIN-SUFFIX,githubusercontent.com,💻 GitHub
+  - DOMAIN-SUFFIX,githubassets.com,💻 GitHub
+  - DOMAIN-SUFFIX,github.io,💻 GitHub
+  - DOMAIN-SUFFIX,gitlab.com,💻 GitHub
+  - DOMAIN-SUFFIX,stackoverflow.com,💻 GitHub
+  - DOMAIN-SUFFIX,npmjs.com,💻 GitHub
+  - DOMAIN-SUFFIX,npmjs.org,💻 GitHub
+  - DOMAIN-SUFFIX,docker.com,💻 GitHub
+  - DOMAIN-SUFFIX,docker.io,💻 GitHub
+  - DOMAIN-SUFFIX,dockerhub.com,💻 GitHub
+  - DOMAIN-SUFFIX,jetbrains.com,💻 GitHub
+  - DOMAIN-SUFFIX,visualstudio.com,💻 GitHub
+  - DOMAIN-SUFFIX,vscode.dev,💻 GitHub
+
+  # 11. Telegram
+  - DOMAIN-SUFFIX,telegram.org,💬 Telegram
+  - DOMAIN-SUFFIX,t.me,💬 Telegram
+  - DOMAIN-SUFFIX,tdesktop.com,💬 Telegram
+  - IP-CIDR,91.108.4.0/22,💬 Telegram,no-resolve
+  - IP-CIDR,91.108.8.0/22,💬 Telegram,no-resolve
+  - IP-CIDR,91.108.12.0/22,💬 Telegram,no-resolve
+  - IP-CIDR,91.108.16.0/22,💬 Telegram,no-resolve
+  - IP-CIDR,91.108.20.0/22,💬 Telegram,no-resolve
+  - IP-CIDR,91.108.56.0/22,💬 Telegram,no-resolve
+  - IP-CIDR,149.154.160.0/20,💬 Telegram,no-resolve
+
+  # 12. Streaming
+  - DOMAIN-SUFFIX,netflix.com,🎬 流媒体
+  - DOMAIN-SUFFIX,nflxvideo.net,🎬 流媒体
+  - DOMAIN-SUFFIX,nflximg.net,🎬 流媒体
+  - DOMAIN-SUFFIX,nflxext.com,🎬 流媒体
+  - DOMAIN-SUFFIX,disneyplus.com,🎬 流媒体
+  - DOMAIN-SUFFIX,disney-plus.net,🎬 流媒体
+  - DOMAIN-SUFFIX,hulu.com,🎬 流媒体
+  - DOMAIN-SUFFIX,max.com,🎬 流媒体
+  - DOMAIN-SUFFIX,hbomax.com,🎬 流媒体
+  - DOMAIN-SUFFIX,primevideo.com,🎬 流媒体
+  - DOMAIN-SUFFIX,amazonvideo.com,🎬 流媒体
+  - DOMAIN-SUFFIX,spotify.com,🎬 流媒体
+
+  # 13. Social media
+  - DOMAIN-SUFFIX,x.com,📱 社交媒体
+  - DOMAIN-SUFFIX,twitter.com,📱 社交媒体
+  - DOMAIN-SUFFIX,facebook.com,📱 社交媒体
+  - DOMAIN-SUFFIX,fbcdn.net,📱 社交媒体
+  - DOMAIN-SUFFIX,instagram.com,📱 社交媒体
+  - DOMAIN-SUFFIX,threads.net,📱 社交媒体
+  - DOMAIN-SUFFIX,tiktok.com,📱 社交媒体
+  - DOMAIN-SUFFIX,tiktokcdn.com,📱 社交媒体
+  - DOMAIN-SUFFIX,reddit.com,📱 社交媒体
+  - DOMAIN-SUFFIX,redd.it,📱 社交媒体
+  - DOMAIN-SUFFIX,pinterest.com,📱 社交媒体
+  - DOMAIN-SUFFIX,linkedin.com,📱 社交媒体
+
+  # 14. Common foreign websites
+  - DOMAIN-SUFFIX,medium.com,🌍 国外网站
+  - DOMAIN-SUFFIX,quora.com,🌍 国外网站
+  - DOMAIN-SUFFIX,wikipedia.org,🌍 国外网站
+  - DOMAIN-SUFFIX,archive.org,🌍 国外网站
+  - DOMAIN-SUFFIX,cloudflare.com,🌍 国外网站
+  - DOMAIN-SUFFIX,vercel.com,🌍 国外网站
+  - DOMAIN-SUFFIX,netlify.com,🌍 国外网站
+
+  # 15. China direct
+  - GEOIP,CN,DIRECT
+
+  # 16. Final
+  - MATCH,🐟 漏网之鱼
