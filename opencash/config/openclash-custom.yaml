@@ -379,8 +379,6 @@ rules:
   - DOMAIN-SUFFIX,leonardo.ai,🤖 AI
   - DOMAIN-SUFFIX,challenges.cloudflare.com,🤖 AI
   - DOMAIN-SUFFIX,turnstile.cloudflare.com,🤖 AI
-  - DOMAIN-SUFFIX,cf-chl.com,🤖 AI
-  - DOMAIN-SUFFIX,linkeei.com,🤖 AI
 
   # 7. AI coding tools
   - DOMAIN-SUFFIX,copilot.microsoft.com,🧑‍💻 Copilot
@@ -469,6 +467,7 @@ rules:
 
   # 14. Common foreign websites
   - DOMAIN-SUFFIX,medium.com,🌍 国外网站
+  - DOMAIN-SUFFIX,linkeei.com,🌍 国外网站
   - DOMAIN-SUFFIX,quora.com,🌍 国外网站
   - DOMAIN-SUFFIX,wikipedia.org,🌍 国外网站
   - DOMAIN-SUFFIX,archive.org,🌍 国外网站
