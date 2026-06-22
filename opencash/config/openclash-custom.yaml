@@ -147,11 +147,11 @@ proxy-groups:
 
   - name: 🔍 Google
     type: select
-    proxies: [♻️ 所有-自动, 🇭🇰 香港, 🇹🇼 台湾, 🇯🇵 日本, 🇸🇬 新加坡, 🇺🇸 美国, 🌍 其他, 🧭 所有节点]
+    proxies: [🇭🇰 香港, 🇯🇵 日本, 🇸🇬 新加坡, 🇺🇸 美国, ♻️ 所有-自动, 🇹🇼 台湾, 🌍 其他, 🧭 所有节点]
 
   - name: 💻 GitHub
     type: select
-    proxies: [♻️ 所有-自动, 🇭🇰 香港, 🇹🇼 台湾, 🇯🇵 日本, 🇸🇬 新加坡, 🇺🇸 美国, 🌍 其他, 🧭 所有节点]
+    proxies: [🇭🇰 香港, 🇯🇵 日本, 🇸🇬 新加坡, 🇺🇸 美国, ♻️ 所有-自动, 🇹🇼 台湾, 🌍 其他, 🧭 所有节点]
 
   - name: 💬 Telegram
     type: select
@@ -167,11 +167,11 @@ proxy-groups:
 
   - name: 🌍 国外网站
     type: select
-    proxies: [♻️ 所有-自动, 🇭🇰 香港, 🇹🇼 台湾, 🇯🇵 日本, 🇸🇬 新加坡, 🇺🇸 美国, 🌍 其他, 🧭 所有节点]
+    proxies: [🇭🇰 香港, 🇯🇵 日本, 🇸🇬 新加坡, 🇺🇸 美国, ♻️ 所有-自动, 🇹🇼 台湾, 🌍 其他, 🧭 所有节点]
 
   - name: 🐟 漏网之鱼
     type: select
-    proxies: [♻️ 所有-自动, 🌍 国外网站, 🚀 节点选择, DIRECT]
+    proxies: [🚀 节点选择, 🌍 国外网站, ♻️ 所有-自动, DIRECT]
 
   - name: 🛑 广告拦截
     type: select
@@ -377,6 +377,10 @@ rules:
   - DOMAIN-SUFFIX,runwayml.com,🤖 AI
   - DOMAIN-SUFFIX,ideogram.ai,🤖 AI
   - DOMAIN-SUFFIX,leonardo.ai,🤖 AI
+  - DOMAIN-SUFFIX,challenges.cloudflare.com,🤖 AI
+  - DOMAIN-SUFFIX,turnstile.cloudflare.com,🤖 AI
+  - DOMAIN-SUFFIX,cf-chl.com,🤖 AI
+  - DOMAIN-SUFFIX,linkeei.com,🤖 AI
 
   # 7. AI coding tools
   - DOMAIN-SUFFIX,copilot.microsoft.com,🧑‍💻 Copilot
@@ -397,6 +401,7 @@ rules:
 
   # 9. Google non-AI
   - DOMAIN-SUFFIX,google.com,🔍 Google
+  - DOMAIN-SUFFIX,google.com.hk,🔍 Google
   - DOMAIN-SUFFIX,gstatic.com,🔍 Google
   - DOMAIN-SUFFIX,googleapis.com,🔍 Google
   - DOMAIN-SUFFIX,googleusercontent.com,🔍 Google
