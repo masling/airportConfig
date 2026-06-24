@@ -245,6 +245,7 @@ rules:
   - DOMAIN-SUFFIX,netlify.com,🌍 国外网站
 
   # 15. China direct
+  - GEOSITE,cn,DIRECT
   - GEOIP,CN,DIRECT
 
   # 16. Final
