@@ -244,9 +244,17 @@ rules:
   - DOMAIN-SUFFIX,vercel.com,🌍 国外网站
   - DOMAIN-SUFFIX,netlify.com,🌍 国外网站
 
-  # 15. China direct
+  # 15. Japan / Korea / Taiwan regional access
+  - DOMAIN-SUFFIX,jp,🌏 日韩台
+  - DOMAIN-SUFFIX,kr,🌏 日韩台
+  - DOMAIN-SUFFIX,tw,🌏 日韩台
+  - GEOIP,JP,🌏 日韩台
+  - GEOIP,KR,🌏 日韩台
+  - GEOIP,TW,🌏 日韩台
+
+  # 16. China direct
   - GEOSITE,cn,DIRECT
   - GEOIP,CN,DIRECT
 
-  # 16. Final
+  # 17. Final
   - MATCH,🐟 漏网之鱼
