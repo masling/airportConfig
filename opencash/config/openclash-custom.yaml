@@ -480,7 +480,11 @@ rules:
   - DOMAIN-SUFFIX,vercel.com,🌍 国外网站
   - DOMAIN-SUFFIX,netlify.com,🌍 国外网站
 
-  # 15. Japan / Korea / Taiwan regional access
+  # 15. Singapore hosted services
+  - DOMAIN,wysivncnpvfacgljtmdd.supabase.co,🇸🇬 新加坡
+  - IP-CIDR,47.236.129.186/32,🇸🇬 新加坡,no-resolve
+
+  # 16. Japan / Korea / Taiwan regional access
   - DOMAIN-SUFFIX,jp,🌏 日韩台
   - DOMAIN-SUFFIX,kr,🌏 日韩台
   - DOMAIN-SUFFIX,tw,🌏 日韩台
@@ -488,9 +492,13 @@ rules:
   - GEOIP,KR,🌏 日韩台
   - GEOIP,TW,🌏 日韩台
 
-  # 16. China direct
+  # 17. Singapore regional access
+  - DOMAIN-SUFFIX,sg,🇸🇬 新加坡
+  - GEOIP,SG,🇸🇬 新加坡
+
+  # 18. China direct
   - GEOSITE,cn,DIRECT
   - GEOIP,CN,DIRECT
 
-  # 17. Final
+  # 19. Final
   - MATCH,🐟 漏网之鱼
