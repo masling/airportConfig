@@ -344,7 +344,6 @@ rules:
 
   # 2. Ads
   - DOMAIN-SUFFIX,adservice.google.com,🛑 广告拦截
-  - DOMAIN-SUFFIX,ads.google.com,🛑 广告拦截
   - DOMAIN-SUFFIX,doubleclick.net,🛑 广告拦截
   - DOMAIN-SUFFIX,googlesyndication.com,🛑 广告拦截
   - DOMAIN-SUFFIX,googleadservices.com,🛑 广告拦截
@@ -403,6 +402,7 @@ rules:
   - DOMAIN-SUFFIX,yt3.ggpht.com,📺 YouTube
 
   # 9. Google non-AI
+  - DOMAIN,ads.google.com,🔍 Google
   - DOMAIN-SUFFIX,google.com,🔍 Google
   - DOMAIN-SUFFIX,google.com.hk,🔍 Google
   - DOMAIN-SUFFIX,gstatic.com,🔍 Google
