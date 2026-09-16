@@ -342,6 +342,9 @@ rules:
   - IP-CIDR,169.254.0.0/16,DIRECT,no-resolve
   - IP-CIDR,224.0.0.0/4,DIRECT,no-resolve
 
+  # Oracle direct
+  - DOMAIN-SUFFIX,oracle.com,DIRECT
+
   # 2. Ads
   - DOMAIN-SUFFIX,adservice.google.com,🛑 广告拦截
   - DOMAIN-SUFFIX,doubleclick.net,🛑 广告拦截
