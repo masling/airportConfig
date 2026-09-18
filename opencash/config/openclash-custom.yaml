@@ -344,6 +344,7 @@ rules:
 
   # Oracle direct
   - DOMAIN-SUFFIX,oracle.com,DIRECT
+  - DOMAIN-SUFFIX,oraclecloud.com,DIRECT
 
   # 2. Ads
   - DOMAIN-SUFFIX,adservice.google.com,🛑 广告拦截
